@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(:version => 20130213224933) do
   create_table "links", :force => true do |t|
     t.string   "URL"
     t.string   "name"
-    t.date   "dateSaved"
+    t.string   "dateSaved"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
