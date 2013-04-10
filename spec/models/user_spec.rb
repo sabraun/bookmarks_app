@@ -1,0 +1,71 @@
+require 'spec_helper'
+
+describe User do
+
+  before do
+    @user = User.new(name: "Example User", email: "user@example.com", 
+                     password: "foobarx", password_confirmation: "foobarx")
+  end
+
+  subject { @user }
+
+  it { should respond_to(:name) }
+  it { should respond_to(:realName) }
+  it { should respond_to(:email) }
+  it { should respond_to(:password_digest) }
+  it { should respond_to(:password) }
+  it { should respond_to(:password_confirmation) }
+  it { should respond_to(:authenticate) }
+
+  # failing test ???
+  it { should be_valid }
+   
+  describe "when name is not present" do
+    before { @user.name = " " }
+    it { should_not be_valid }
+  end
+   
+  describe "when email is not present" do
+    before { @user.email = " " }
+    it { should_not be_valid }
+  end
+   
+  describe "when email format is invalid" do
+    it "should be invalid" do
+      addresses = %w[user@foo,com user_at_foo.org example.user@foo.
+                     foo@bar_baz.com foo@bar+baz.com]
+      addresses.each do |invalid_address|
+        @user.email = invalid_address
+        @user.should_not be_valid
+      end      
+    end
+  end
+   
+    
+  describe "when name is already taken" do
+    before do
+        user_with_same_name = @user.dup
+        user_with_same_name.save
+    end
+
+    it { should_not be_valid }
+  end
+  
+  describe "when password is not present" do
+    before { @user.password = @user.password_confirmation = " " }
+    it { should_not be_valid }
+  end
+
+  describe "when password doesn't match confirmation" do
+    before { @user.password_confirmation = "mismatch" }
+    it { should_not be_valid }
+  end
+
+  describe "when password confirmation is nil" do
+    before { @user.password_confirmation = nil }
+    it { should_not be_valid }
+  end
+  
+  
+  
+end

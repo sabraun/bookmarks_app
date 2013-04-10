@@ -1,6 +1,11 @@
 BookmarksApp::Application.routes.draw do
-  resources :links
+  get "users/new"
 
+  resources :links
+  
+  root to: 'links#index'
+  
+  match '/signup',  to: 'users#new'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -9,7 +14,7 @@ BookmarksApp::Application.routes.draw do
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
 
-  # Sample of named route:
+  # Sample of nam ed route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
 
