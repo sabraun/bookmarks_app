@@ -1,6 +1,7 @@
 // Place all the styles related to the links controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap";
 
 h1 {color:brown;}
 
@@ -10,3 +11,5 @@ td {padding: .5em 1em 0em .5em;}
 
 tr:nth-child(even) {background: #ffc}
 tr:nth-child(odd) {background: #FFF}
+
+

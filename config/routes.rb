@@ -2,6 +2,7 @@ BookmarksApp::Application.routes.draw do
   get "users/new"
 
   resources :links
+  resources :users
   
   root to: 'links#index'
   

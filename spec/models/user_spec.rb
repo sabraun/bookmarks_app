@@ -69,4 +69,35 @@ describe User do
   
   
   
+  describe "link associations" do
+
+    before { @user.save }
+    let!(:older_link) do 
+        FactoryGirl.create(:link, user: @user, created_at: 1.day.ago)
+    end
+    let!(:newer_link) do
+        FactoryGirl.create(:link, user: @user, created_at: 1.hour.ago)
+    end
+
+    it "should have the right links in the right order" do
+        @user.links.should == [newer_link, older_link]
+    end
+    
+    
+    it "should destroy associated links" do
+        links = @user.links.dup
+      @user.destroy
+      links.should_not be_empty
+      links.each do |link|
+          Link.find_by_id(link.id).should be_nil
+      end
+    end
+    
+    
+  end
+  
+  
+  
+  
+  
 end
