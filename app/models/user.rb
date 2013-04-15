@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
     attr_accessible :name, :realName, :email, :password, :password_confirmation
     has_secure_password
     has_many :links, dependent: :destroy
+
+    before_save :create_remember_token
+    
     
   validates :name, presence: true, uniqueness: true
   validates :realName, :length => {:maximum => 75, :minimum => 2}
