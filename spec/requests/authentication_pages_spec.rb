@@ -16,33 +16,30 @@ describe "Authentication" do
       it { should have_link('Profile', href: user_path(user)) }
       it { should have_link('Settings', href: edit_user_path(user)) }
       it { should have_link('Sign out', href: signout_path) }
-  
-      
-      # TEST FOR CHANGING USER SETTINGS
-  # has error no method 'click_button' ???
-      #click_button "Account"
-      #click_button "Settings"
-      
-       #   fill_in "Name",      with: user.name
-       #   fill_in "RealName",  with: user.realName
-       #   fill_in "Email",     with: user.email
-       #   fill_in "Password",  with: user.password
-      #click_button "Save changes"
-          
-       #it { should have_selector('div', text: 'Profile updated') }
+
       
      end
     
+     
+    describe "as non-admin user" do
+      let(:user) { FactoryGirl.create(:user) }
+      let(:non_admin) { FactoryGirl.create(:user) }
+
+      before { sign_in non_admin }
+
+      describe "submitting a DELETE request to the Users#destroy action" do
+        before { delete user_path(user) }
+        specify { response.should redirect_to(root_path) }        
+      end
+    end
 
      
      
      
-     
-    
     
   end
   
-  
+
   
   
 end
