@@ -16,8 +16,10 @@ describe "Authentication" do
       it { should have_link('Profile', href: user_path(user)) }
       it { should have_link('Settings', href: edit_user_path(user)) }
       it { should have_link('Sign out', href: signout_path) }
-
-  # has error no method 'click_button'
+  
+      
+      # TEST FOR CHANGING USER SETTINGS
+  # has error no method 'click_button' ???
       #click_button "Account"
       #click_button "Settings"
       
@@ -29,11 +31,13 @@ describe "Authentication" do
           
        #it { should have_selector('div', text: 'Profile updated') }
       
-  
-  
      end
     
-    
+
+     
+     
+     
+     
     
     
   end

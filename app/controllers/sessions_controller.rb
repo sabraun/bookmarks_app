@@ -11,7 +11,8 @@ class SessionsController < ApplicationController
       redirect_back_or user
     else
       flash[:error] = 'Invalid name/password combination' 
-      render 'new'
+      #render 'new'
+      redirect_to root_path
     end
   end
    
